@@ -1,0 +1,132 @@
+#page-auth {
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+
+    // main div h2{
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     margin-bottom: 24px;
+    // }
+}
+
+aside {
+    flex: 7;
+    background: #835afd;
+    display: flex;
+    flex-direction: column;
+    padding: 100px 80px;
+    justify-content: center;
+    align-items: start;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 8;
+    background: #f8f8f8;
+}
+
+main div > img {
+    width: 160px;
+    height: 70px;
+    margin-bottom: 52px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+main img + button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ea4335;
+    font-size: 1rem;
+    width: 320px;
+    height: 50px;
+    border-radius: 8px;
+    padding: 13px;
+    
+    &:not(:disabled):hover {
+        filter: brightness(0.9);
+    }
+
+    :disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    img {
+        margin-right: 0.5rem;
+    }
+
+    + div{
+        margin: 2rem 0;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    width: 320px;
+
+    > input {
+        padding: 13px 12px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+    }
+
+    button {
+        background: #835afd;
+        border-radius: 8px;
+        padding: 13px;
+
+        &:hover {
+            filter: brightness(0.9);
+        }
+    }
+}
+
+#separador { 
+    display: flex;
+    align-items: center;
+
+    &::before {
+        content: "";
+        height: 2px;
+        background: #a8a8b3;
+        flex: 1;
+        margin-right: 4px;
+    }
+
+    &::after {
+        content: "";
+        height: 2px;
+        background-color: #a8a8b3;
+        flex: 1;
+        margin-left: 4px;
+    }
+}
+
+img + h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.form p {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    margin-top: 16px;
+
+    a {
+        color: #e559f9;
+        &:hover {
+            filter: brightness(0.7);
+        }
+    }
+}
