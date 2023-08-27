@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#page-room {
+    background-color: #f8f8f8;
+    height: 100vh;
+    
+    // * {
+    //     border: 1px solid red;
+    // }
+
+    > header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 160px;
+        margin-bottom: 64px;
+        border-bottom: 1px solid #e2e2e2;
+
+        div button {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            border: 1px solid #835afd;
+            border-radius: 7px;
+            overflow: hidden;
+
+            img {
+                background-color: #835afd;
+                padding: 7px;
+                object-fit: cover;
+            }
+
+            div {
+                padding: 8px;
+                align-self: center;
+            }
+        }
+
+        > img {
+            margin: 15px;
+        }
+    }
+
+    body:first-of-type {
+        display: flex;
+        flex-direction: column;
+        align-items: space-between;
+        max-width: 800px;
+        margin: 0 auto;
+
+        > div{
+            display: flex;
+            align-items: center;
+            
+            h1 {
+                font-family: "Poppins", sans-serif;
+                font-size: 24px;
+            }
+
+            div {
+                background: #E559F9;
+                border-radius: 9px;
+                padding: 7px;
+                color: #f8f8f8;
+                margin-left: 16px;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            textarea {
+                display: flex;
+                flex-direction: column;
+                padding: 16px;
+                background-color: #fefefe;
+                border-radius: 8px;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+                resize: vertical;
+                min-height: 130px;
+                margin-top: 24px;
+                margin-bottom: 36px;
+                text-decoration: none;
+            }
+
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                h3 > button {
+                    background: transparent;
+                    text-decoration: underline;
+                    color: #835afd;
+                    border: 0;
+                }
+
+                .user-info {
+                    gap: 8px;
+
+                    img {
+                        height: 30px;
+                        border-radius: 7px;
+                    }
+
+                    span {
+                        font-family: "Roboto", sans-serif;
+                        font-weight: 500;
+                        color: #29292e;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

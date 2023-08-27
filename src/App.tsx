@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route  } from "react-router-dom"
 import { createContext, useState, useEffect } from "react";
 import { auth } from "./services/Firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Room } from "./pages/Room";
 
 type AuthContextType = {
   user: User | undefined;
@@ -11,9 +12,9 @@ type AuthContextType = {
 }
 
 type User = {
-  id: String;
-  name: String;
-  avatar: String;
+  id: string;
+  name: string;
+  avatar: string;
 }
 
 export const AuthContext = createContext({} as AuthContextType); 
@@ -68,6 +69,7 @@ function App() {
         <Routes> 
           <Route path="/" Component={ Home }></Route>
           <Route path="/rooms/new" Component={ NewRoom }></Route>
+          <Route path="/rooms/:id" Component={ Room }></Route>
         </Routes>
       </AuthContext.Provider>
     </BrowserRouter>

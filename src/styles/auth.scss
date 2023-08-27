@@ -2,13 +2,6 @@
     display: flex;
     align-items: stretch;
     height: 100vh;
-
-    // main div h2{
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     margin-bottom: 24px;
-    // }
 }
 
 aside {
@@ -18,7 +11,7 @@ aside {
     flex-direction: column;
     padding: 100px 80px;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
 }
 
 main {
@@ -36,6 +29,10 @@ main div > img {
     margin-bottom: 52px;
     margin-left: 25%;
     margin-right: 25%;
+}
+
+#google-button {
+    background: #ea4335;
 }
 
 main img + button {
@@ -77,6 +74,7 @@ main img + button {
         padding: 13px 12px;
         margin-bottom: 16px;
         border-radius: 8px;
+        border: 1px solid #a8a8b3;
     }
 
     button {
