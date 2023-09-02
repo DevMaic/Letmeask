@@ -2,7 +2,7 @@ import illustration from "../assets/images/illustration.svg"
 import logoLetMeAsk from "../assets/images/logo.svg"
 import logoGoogle from "../assets/images/google_icon.svg"
 import "../styles/auth.scss"
-import { Button } from "../Button";
+import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App";
 import { useContext, FormEvent, useState } from "react";

@@ -1,7 +1,7 @@
 import illustration from "../assets/images/illustration.svg"
 import logoLetMeAsk from "../assets/images/logo.svg"
 import "../styles/auth.scss"
-import { Button } from "../Button";
+import { Button } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom"
 import { useState, FormEvent } from "react";
 import { push, ref } from "firebase/database";
@@ -18,7 +18,7 @@ export function NewRoom() {
             title: newRoom,
             authorId: auth.currentUser?.uid
         })
-        
+
         navigator(`/rooms/${reference.key}`); 
     }
 

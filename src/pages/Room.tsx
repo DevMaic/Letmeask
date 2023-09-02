@@ -1,13 +1,15 @@
 import logoImg from "../assets/images/logo.svg"
 import copySimbol from "../assets/images/copy.svg"
 import balloons from "../assets/images/baloons.svg"
-import { Button } from "../Button";
+import { Button } from "../components/Button";
 import "../styles/rooms.scss"
 import { useParams } from "react-router-dom";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../App";
 import { database } from "../services/Firebase";
-import { get, push, ref, onValue, DataSnapshot } from "firebase/database";
+import { get, push, ref, onValue, DataSnapshot, off } from "firebase/database";
+import { Questions } from "../components/Questions";
+import React from "react";
 
 type typeParams = {
     id: string;
@@ -15,22 +17,38 @@ type typeParams = {
 
 type FireBaseQuestions = Record<string, {
     author: {
-        name: String;
-        avatar: String;
+        name: string;
+        avatar: string;
     };
-    content: String;
+    content: string;
     isAnsweared: boolean;
     isHighlighted: boolean;
+    likes: Record<string, {
+        authorId: string,
+    }>
 }>
+
+type Question = {
+    id: string,
+    author: {
+        name: string;
+        avatar: string;
+    };
+    content: string;
+    isAnsweared: boolean;
+    isHighlighted: boolean;
+    likeCount: number;
+    hasLiked: string | undefined;
+}
 
 export function Room() {
     const params = useParams<typeParams>();
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [newQuestion, setNewQuestion] = useState("");
-    const roomId = params.id;
+    const roomId = params.id!;
     const [numberOfQuestions, setNumberOfQuestions] = useState(0);
     const [title, setTitle] = useState("");
-    const [questions, setQuestions] = useState({});
+    const [questions, setQuestions] = useState<Question[]>([]);
 
     function copyRoomCodeToClipboard() {
         navigator.clipboard.writeText(params.id!);
@@ -66,7 +84,7 @@ export function Room() {
     useEffect(() => {
         onValue(ref(database, `/rooms/${roomId}/questions`), (snapshot: DataSnapshot) => {
             const fireBaseQuestions: FireBaseQuestions = snapshot.val() || {};
-            setQuestions(fireBaseQuestions);
+            // setQuestions(fireBaseQuestions);
             setNumberOfQuestions(snapshot.size);
             get(ref(database, `/rooms/${roomId}/title`)).then( value => {
                 setTitle(value.val());
@@ -79,13 +97,20 @@ export function Room() {
                     author: value.author,
                     isHighlighted: value.isHighlighted,
                     isAnsweared: value.isAnsweared,
+                    likeCount: Object.values(value.likes ?? {}).length,
+                    hasLiked: Object.entries(value.likes ?? {}).find(([key, value]) => value.authorId === user?.id)?.[0]
                 }
             })
             
-            console.log(parsedQuestion)
+            // console.log(parsedQuestion)
+            setQuestions(parsedQuestion);
         })
 
-    }, [roomId]);
+        return () => {
+            off(ref(database, `/rooms/${roomId}/questions`));
+        }
+
+    }, [roomId, user?.id]);
 
     return (
         <div id="page-room">
@@ -101,9 +126,8 @@ export function Room() {
             <body>
                 <div>
                     <h1>Sala {title}</h1>
-                    <div>{numberOfQuestions} pergunta(s)</div>
+                    <div id="titulo">{numberOfQuestions} pergunta(s)</div>
                 </div>
-                
                 <form onSubmit={handleNewQuestion}>
                     <textarea 
                         onChange={event => setNewQuestion(event.target.value)}
@@ -122,10 +146,21 @@ export function Room() {
                         <Button>Enviar pergunta</Button>
                     </div>
                 </form>
-                {JSON.stringify(questions)}
-                {/* <img src={balloons} alt="Imagem de balões de fala"/>
-                <p><h3>Nenhuma pergunta por aqui...</h3></p>
-                <h2>Envie o código dessa sala para seus amigos e comece a responder perguntas!</h2> */}
+                {
+                    questions.map(Question => {
+                        return (
+                            <Questions
+                                key={Question.id}
+                                content={Question.content}
+                                author={Question.author}
+                                roomId = {roomId}
+                                chave={Question.id}
+                                likeCount={Question.likeCount}
+                                hasLiked={Question.hasLiked}
+                            ></Questions>
+                        )
+                    })
+                }
             </body>
         </div>
     );

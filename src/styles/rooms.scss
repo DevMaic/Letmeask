@@ -6,7 +6,9 @@
 
 #page-room {
     background-color: #f8f8f8;
-    height: 100vh;
+    min-height: 100vh;
+    align-self: stretch;
+    padding-bottom: 64px;
     
     // * {
     //     border: 1px solid red;
@@ -27,6 +29,7 @@
             border: 1px solid #835afd;
             border-radius: 7px;
             overflow: hidden;
+            cursor: pointer;
 
             img {
                 background-color: #835afd;
@@ -52,7 +55,7 @@
         max-width: 800px;
         margin: 0 auto;
 
-        > div{
+        > div {
             display: flex;
             align-items: center;
             
@@ -61,10 +64,10 @@
                 font-size: 24px;
             }
 
-            div {
+            #titulo{
                 background: #E559F9;
-                border-radius: 9px;
-                padding: 7px;
+                border-radius: 9999px;
+                padding: 8px 16px 8px 16px;
                 color: #f8f8f8;
                 margin-left: 16px;
             }
@@ -80,12 +83,16 @@
                 padding: 16px;
                 background-color: #fefefe;
                 border-radius: 8px;
-                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
                 resize: vertical;
                 min-height: 130px;
                 margin-top: 24px;
-                margin-bottom: 36px;
-                text-decoration: none;
+                margin-bottom: 16px;
+                resize: none;
+
+                &:focus {
+                    outline: #835afd solid 2px;
+                }
             }
 
             div {
@@ -104,8 +111,8 @@
                     gap: 8px;
 
                     img {
-                        height: 30px;
-                        border-radius: 7px;
+                        height: 32px;
+                        border-radius: 9999px;
                     }
 
                     span {
@@ -116,6 +123,12 @@
                     }
                 }
             }
+        }
+
+        #posted-questions {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid red;
         }
     }
 }
